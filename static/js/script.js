@@ -32,8 +32,16 @@ document.getElementById('imageUpload').addEventListener('change', function(event
 
 // Handling form submissions using Fetch API
 function handleFormSubmit(formId, endpoint) {
-    document.getElementById(formId).addEventListener('submit', function(event) {
+    const formElement = document.getElementById(formId);
+    formElement.addEventListener('submit', function(event) {
         event.preventDefault();
+
+        // Check for reCAPTCHA response specific to the form being submitted
+        const recaptchaValue = formElement.querySelector('.g-recaptcha-response').value;
+        if (!recaptchaValue) {
+            alert('Please complete the reCAPTCHA validation.');
+            return;
+        }
 
         // Provide feedback with a loading spinner or message
         const loadingMessage = document.createElement('p');

@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 import os
+import requests
 from main import get_response, convert_to_text
+from config import RECAPTCHA_SECRET_KEY
 
 app = Flask(__name__)
 
@@ -45,6 +47,15 @@ def analyze_image():
         return jsonify({'analysis': analysis})
 
     return jsonify({'error': 'Invalid file type'}), 400
+
+def verify_recaptcha(recaptcha_response):
+    payload = {
+        'secret': RECAPTCHA_SECRET_KEY,
+        'response': recaptcha_response
+    }
+    response = requests.post('https://www.google.com/recaptcha/api/siteverify', payload)
+    result = response.json()
+    return result.get('success')
 
 if __name__ == '__main__':
     app.run(debug=True)
