@@ -85,3 +85,31 @@ darkModeToggle.addEventListener('click', function() {
     document.body.classList.toggle('dark-mode');
 });
 document.body.appendChild(darkModeToggle);
+
+function handleDrop(event) {
+    event.preventDefault();
+    
+    const dropZone = event.currentTarget;
+    dropZone.classList.remove('active-drag');
+
+    const fileInput = document.getElementById('imageUpload');
+    const dataTransfer = event.dataTransfer;
+    const files = dataTransfer.files;
+
+    if (files.length) {
+        fileInput.files = files;
+        document.getElementById('fileNameDisplay').textContent = 'Selected File: ' + files[0].name;
+    }
+}
+
+function handleDragOver(event) {
+    event.preventDefault();
+    
+    const dropZone = event.currentTarget;
+    dropZone.classList.add('active-drag');
+}
+
+function handleDragLeave(event) {
+    const dropZone = event.currentTarget;
+    dropZone.classList.remove('active-drag');
+}

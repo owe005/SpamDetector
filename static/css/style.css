@@ -85,7 +85,7 @@ button:hover {
     transition: border-color 0.3s;
 }
 
-.drop-zone.dragging {
+.drop-zone.active-drag {
     border-color: #3498db;
 }
 
