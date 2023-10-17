@@ -1,13 +1,108 @@
-.drop-zone {
-    border: 2px dashed #cccccc;
-    padding: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Reset some basic elements */
+body, textarea, select, button {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.3s;
+}
+
+body {
+    background: linear-gradient(120deg, #f6d365, #fda085);
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    max-width: 900px;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.8); /* Slight transparency */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+}
+
+h2 {
     text-align: center;
+    margin-bottom: 40px;
+    color: #2c3e50;
+}
+
+label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+select, textarea, button {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 25px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+select:hover, textarea:hover, button:hover {
+    border-color: #3498db;
+    transform: translateY(-2px); /* Slight move on hover */
+}
+
+button {
     cursor: pointer;
-    margin-top: 20px;
-    transition: all 0.3s ease;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px); /* Slight move on hover */
+}
+
+.drop-zone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    border: 3px dashed #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    position: relative;
+    transition: all 0.3s;
 }
 
 .drop-zone.dragging {
-    border-color: #007BFF;
-    background-color: rgba(0, 123, 255, 0.1);
+    border-color: #3498db;
+}
+
+.file-label {
+    cursor: pointer;
+    color: #3498db;
+    text-decoration: underline;
+}
+
+.result {
+    padding: 25px;
+    background-color: #e8f5e9;
+    border-radius: 8px;
+    border: 2px solid #c8e6c9;
+    margin-top: 30px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.result:hover {
+    transform: scale(1.02); /* Slight scaling on hover */
+}
+
+.result p {
+    margin: 0;
 }

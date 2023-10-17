@@ -1,3 +1,4 @@
+
 document.getElementById('inputType').addEventListener('change', function(event) {
     const selectedType = event.target.value;
     if (selectedType === 'text') {
@@ -25,71 +26,36 @@ document.getElementById('imageUpload').addEventListener('change', function(event
         return;
     }
 
-    uploadImage(file);
     const fileNameDisplay = document.getElementById('fileNameDisplay');
     fileNameDisplay.textContent = 'Selected File: ' + file.name;
 
 });
 
-function uploadImage(file) {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    fetch('/upload', {
-        method: 'POST',
-        body: formData
-    })
-
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
-
-    .catch(error => {
-        console.error(error);
+// Handling form submissions using Fetch API
+function handleFormSubmit(formId, endpoint) {
+    document.getElementById(formId).addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        fetch(endpoint, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            displayAnalysis(data.analysis);
+        })
+        .catch(error => {
+            console.error(error);
+        });
     });
-
 }
 
-// Preventing default form submission for text form
-document.getElementById('textForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    fetch('/analyze-text', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        displayAnalysis(data.analysis);
-    })
-    .catch(error => {
-        console.error(error);
-    });
-});
-
-// Preventing default form submission for image form
-document.getElementById('imageForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    fetch('/analyze-image', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        displayAnalysis(data.analysis);
-    })
-    .catch(error => {
-        console.error(error);
-    });
-});
+handleFormSubmit('textForm', '/analyze-text');
+handleFormSubmit('imageForm', '/analyze-image');
 
 function displayAnalysis(analysis) {
-    // Format the analysis string for better readability using HTML line breaks
     analysis = analysis.replace('Legitimacy:', '<br><br>Legitimacy:')
-                        .replace('Reasoning:', '<br><br>Reasoning:')
-                        .replace('Confidence:', '<br><br>Confidence:');
+                       .replace('Reasoning:', '<br><br>Reasoning:');
 
     const resultDiv = document.querySelector('.result');
     if (!resultDiv) {

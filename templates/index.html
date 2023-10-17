@@ -26,10 +26,9 @@
 
         <form id="imageForm" action="/analyze-image" method="post" enctype="multipart/form-data" style="display: none;">
             <div class="drop-zone" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" onclick="document.getElementById('imageUpload').click()">
-                Drag & Drop your image here or <label for="imageUpload" class="file-label">click to select</label>
+                Drag & Drop your image here<label for="imageUpload" class="file-label"></label>
                 <input type="file" id="imageUpload" name="file" accept="image/*" style="display: none;">
             </div>
-            alternatively you may click this -> <button type="button" onclick="document.getElementById('imageUpload').click()">Browse Files</button>
             <p id="fileNameDisplay"></p>
             <input type="submit" value="Submit Image" name="submit">
         </form>
