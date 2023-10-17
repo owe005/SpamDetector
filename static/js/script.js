@@ -1,3 +1,15 @@
+
+document.getElementById('inputType').addEventListener('change', function(event) {
+    const selectedType = event.target.value;
+    if (selectedType === 'text') {
+        document.getElementById('textForm').style.display = 'block';
+        document.getElementById('imageForm').style.display = 'none';
+    } else {
+        document.getElementById('textForm').style.display = 'none';
+        document.getElementById('imageForm').style.display = 'block';
+    }
+});
+
 document.getElementById('imageUpload').addEventListener('change', function(event) {
     const file = event.target.files[0];
 
@@ -35,4 +47,29 @@ function uploadImage(file) {
         console.error(error);
     });
 
+}
+
+function handleDragOver(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    document.querySelector('.drop-zone').classList.add('dragging');
+}
+
+function handleDragLeave(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    document.querySelector('.drop-zone').classList.remove('dragging');
+}
+
+function handleDrop(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    document.querySelector('.drop-zone').classList.remove('dragging');
+
+    // Check if the data being dropped is a file
+    if (event.dataTransfer.items && event.dataTransfer.items[0].kind === 'file') {
+        const file = event.dataTransfer.items[0].getAsFile();
+        document.getElementById('imageUpload').files = event.dataTransfer.files;
+        uploadImage(file);  // Use the existing uploadImage function
+    }
 }

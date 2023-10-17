@@ -5,27 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width", initial-scale="1.0">
     <title>Spam Detector</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="static/js/script.js" defer></script>
 </head>
 
 <body>
     <div class="container">
-
         <h2>Spam Detector</h2>
-        <form action="/" method="post">
+
+        <label for="inputType">Choose input type:</label>
+        <select id="inputType">
+            <option value="text">Paste Text</option>
+            <option value="image">Upload Image</option>
+        </select>
+
+        <form id="textForm" action="/analyze-text" method="post">
             <textarea name="text" id="text" cols="30" rows="10" placeholder="Enter text here..."></textarea>
             <input type="submit" value="Submit">
         </form>
 
-        <form action="/" method="post" enctype="multipart/form-data">
-            <input type="file" id="imageUpload" accept="image/*">
-            <input type="submit" value="Upload Image" name="submit">
-
+        <form id="imageForm" action="/analyze-image" method="post" enctype="multipart/form-data" style="display: none;">
+            <div class="drop-zone" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" onclick="document.getElementById('imageUpload').click()">
+                Drag & Drop your image here or <label for="imageUpload" class="file-label">click to select</label>
+                <input type="file" id="imageUpload" name="file" accept="image/*" style="display: none;">
+            </div>
+            <button type="button" onclick="document.getElementById('imageUpload').click()">Browse Files</button>
+            <input type="submit" value="Submit Image" name="submit">
         </form>
 
-        {if analysis is not none %}
+        {% if analysis is not none %}
         <div class="result">
-            <p>Analysis: <strong>{analysis}</strong></p>
+            <p>Analysis: <strong>{{ analysis }}</strong></p>
         </div>
         {% endif %}
 
