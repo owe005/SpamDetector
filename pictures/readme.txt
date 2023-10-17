@@ -1,0 +1,1 @@
+Thinking of just having this folder temporary store images uploaded while they get processed. They would get deleted afterwards.

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width", initial-scale="1.0">
+    <title>Spam Detector</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <h2>Spam Detector</h2>
+        <form action="/" method="post">
+            <textarea name="text" id="text" cols="30" rows="10" placeholder="Enter text here..."></textarea>
+            <input type="submit" value="Submit">
+        </form>
+
+        <form action="/" method="post" enctype="multipart/form-data">
+            <input type="file" id="imageUpload" accept="image/*">
+            <input type="submit" value="Upload Image" name="submit">
+
+        </form>
+
+        {if analysis is not none %}
+        <div class="result">
+            <p>Analysis: <strong>{analysis}</strong></p>
+        </div>
+        {% endif %}
+
+    </div>
+</body>
+
+</html>
