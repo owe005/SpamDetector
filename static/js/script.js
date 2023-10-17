@@ -1,4 +1,3 @@
-
 document.getElementById('inputType').addEventListener('change', function(event) {
     const selectedType = event.target.value;
     if (selectedType === 'text') {
@@ -35,6 +34,13 @@ document.getElementById('imageUpload').addEventListener('change', function(event
 function handleFormSubmit(formId, endpoint) {
     document.getElementById(formId).addEventListener('submit', function(event) {
         event.preventDefault();
+
+        // Provide feedback with a loading spinner or message
+        const loadingMessage = document.createElement('p');
+        loadingMessage.textContent = 'Analyzing... Please wait.';
+        const container = document.querySelector('.container');
+        container.appendChild(loadingMessage);
+
         const formData = new FormData(event.target);
         fetch(endpoint, {
             method: 'POST',
@@ -43,6 +49,7 @@ function handleFormSubmit(formId, endpoint) {
         .then(response => response.json())
         .then(data => {
             displayAnalysis(data.analysis);
+            container.removeChild(loadingMessage); // Remove loading message after analysis
         })
         .catch(error => {
             console.error(error);
@@ -67,3 +74,14 @@ function displayAnalysis(analysis) {
         resultDiv.innerHTML = '<p>' + analysis + '</p>';
     }
 }
+
+// Dark mode toggle functionality
+const darkModeToggle = document.createElement('button');
+darkModeToggle.textContent = 'Toggle Dark Mode';
+darkModeToggle.style.position = 'fixed';
+darkModeToggle.style.top = '10px';
+darkModeToggle.style.right = '10px';
+darkModeToggle.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+});
+document.body.appendChild(darkModeToggle);
