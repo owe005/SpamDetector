@@ -1,4 +1,3 @@
-
 document.getElementById('inputType').addEventListener('change', function(event) {
     const selectedType = event.target.value;
     if (selectedType === 'text') {
@@ -27,6 +26,9 @@ document.getElementById('imageUpload').addEventListener('change', function(event
     }
 
     uploadImage(file);
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    fileNameDisplay.textContent = 'Selected File: ' + file.name;
+
 });
 
 function uploadImage(file) {
@@ -49,27 +51,53 @@ function uploadImage(file) {
 
 }
 
-function handleDragOver(event) {
+// Preventing default form submission for text form
+document.getElementById('textForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    event.stopPropagation();
-    document.querySelector('.drop-zone').classList.add('dragging');
-}
+    const formData = new FormData(event.target);
+    fetch('/analyze-text', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        displayAnalysis(data.analysis);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+});
 
-function handleDragLeave(event) {
+// Preventing default form submission for image form
+document.getElementById('imageForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    event.stopPropagation();
-    document.querySelector('.drop-zone').classList.remove('dragging');
-}
+    const formData = new FormData(event.target);
+    fetch('/analyze-image', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        displayAnalysis(data.analysis);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+});
 
-function handleDrop(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    document.querySelector('.drop-zone').classList.remove('dragging');
+function displayAnalysis(analysis) {
+    // Format the analysis string for better readability using HTML line breaks
+    analysis = analysis.replace('Legitimacy:', '<br><br>Legitimacy:')
+                        .replace('Reasoning:', '<br><br>Reasoning:')
+                        .replace('Confidence:', '<br><br>Confidence:');
 
-    // Check if the data being dropped is a file
-    if (event.dataTransfer.items && event.dataTransfer.items[0].kind === 'file') {
-        const file = event.dataTransfer.items[0].getAsFile();
-        document.getElementById('imageUpload').files = event.dataTransfer.files;
-        uploadImage(file);  // Use the existing uploadImage function
+    const resultDiv = document.querySelector('.result');
+    if (!resultDiv) {
+        const newResultDiv = document.createElement('div');
+        newResultDiv.classList.add('result');
+        newResultDiv.innerHTML = '<p>' + analysis + '</p>';
+        document.querySelector('.container').appendChild(newResultDiv);
+    } else {
+        resultDiv.innerHTML = '<p>' + analysis + '</p>';
     }
 }

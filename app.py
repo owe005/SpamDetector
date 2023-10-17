@@ -21,7 +21,7 @@ def index():
 def analyze_text():
     text = request.form.get('text')
     analysis = get_response(text)
-    return render_template('index.html', analysis=analysis)
+    return jsonify({'analysis': analysis})
 
 @app.route('/analyze-image', methods=['POST'])
 def analyze_image():
@@ -42,7 +42,7 @@ def analyze_image():
         # Clean up: Remove the saved image after processing
         os.remove(filepath)
         
-        return render_template('index.html', analysis=analysis)
+        return jsonify({'analysis': analysis})
 
     return jsonify({'error': 'Invalid file type'}), 400
 
