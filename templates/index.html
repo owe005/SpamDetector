@@ -23,7 +23,7 @@
         <form id="textForm" action="/analyze-text" method="post">
             <textarea name="text" id="text" cols="30" rows="10" placeholder="Enter text here..."></textarea>
             <div class="g-recaptcha" data-sitekey="6LcUA6woAAAAAMUb9sxzM044NaKDuedToRfEu8VA"></div>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit Text" name="submit">
         </form>
 
         <form id="imageForm" action="/analyze-image" method="post" enctype="multipart/form-data" style="display: none;">
@@ -32,8 +32,10 @@
                 <input type="file" id="imageUpload" name="file" accept="image/*" style="display: none;">
             </div>
             <p id="fileNameDisplay"></p>
+        <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 200px; margin-top: 10px;">
             <div class="g-recaptcha" data-sitekey="6LcUA6woAAAAAMUb9sxzM044NaKDuedToRfEu8VA"></div>
             <input type="submit" value="Submit Image" name="submit">
+    
         </form>
 
         {% if analysis is not none %}
@@ -42,7 +44,7 @@
         </div>
         {% endif %}
 
-    </div>
+
 </body>
 
 </html>

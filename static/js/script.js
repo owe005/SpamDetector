@@ -27,6 +27,15 @@ document.getElementById('imageUpload').addEventListener('change', function(event
 
     const fileNameDisplay = document.getElementById('fileNameDisplay');
     fileNameDisplay.textContent = 'Selected File: ' + file.name;
+    
+    // Display image thumbnail
+    const imagePreview = document.getElementById('imagePreview');
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
+    }
+    reader.readAsDataURL(file);
 
 });
 
@@ -83,17 +92,6 @@ function displayAnalysis(analysis) {
     }
 }
 
-// Dark mode toggle functionality
-const darkModeToggle = document.createElement('button');
-darkModeToggle.textContent = 'Toggle Dark Mode';
-darkModeToggle.style.position = 'fixed';
-darkModeToggle.style.top = '10px';
-darkModeToggle.style.right = '10px';
-darkModeToggle.addEventListener('click', function() {
-    document.body.classList.toggle('dark-mode');
-});
-document.body.appendChild(darkModeToggle);
-
 function handleDrop(event) {
     event.preventDefault();
     
@@ -121,3 +119,16 @@ function handleDragLeave(event) {
     const dropZone = event.currentTarget;
     dropZone.classList.remove('active-drag');
 }
+
+// Dark Mode Toggle
+const darkModeCheckbox = document.getElementById('darkModeCheckbox');
+
+darkModeCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+        document.body.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        document.body.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+    }
+});
