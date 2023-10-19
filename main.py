@@ -1,10 +1,7 @@
-from config import API_KEY, PYTESSERACT_PATH # Import API key and Tesseract-OCR path
+from config import API_KEY # Import API key and Tesseract-OCR path
 import openai
 import cv2
 import pytesseract
-
-# Path to Tesseract-OCR executable
-pytesseract.pytesseract.tesseract_cmd = PYTESSERACT_PATH 
 
 openai.api_key = API_KEY
 
