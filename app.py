@@ -3,6 +3,7 @@ import os
 import requests
 from main import get_response, convert_to_text
 from config import RECAPTCHA_SECRET_KEY
+import uuid
 
 app = Flask(__name__)
 
@@ -35,7 +36,8 @@ def analyze_image():
         return jsonify({'error': 'No selected file'}), 400
     
     if file and allowed_file(file.filename):
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        unique_filename = str(uuid.uuid4()) + "." + file.filename.split('.')[-1]
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
         file.save(filepath)
         
         text_from_image = convert_to_text(filepath)
