@@ -50,6 +50,7 @@ def analyze_text():
     analysis = get_response(text)
     return jsonify({'analysis': analysis})
 
+'''
 def verify_recaptcha(recaptcha_response):
     payload = {
         'secret': RECAPTCHA_SECRET_KEY,
@@ -58,6 +59,7 @@ def verify_recaptcha(recaptcha_response):
     response = requests.post('https://www.google.com/recaptcha/api/siteverify', payload)
     result = response.json()
     return result.get('success')
-
+'''
+    
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001)
