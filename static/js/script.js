@@ -1,11 +1,11 @@
 document.getElementById('inputType').addEventListener('change', function(event) {
     const selectedType = event.target.value;
-    if (selectedType === 'text') {
-        document.getElementById('textForm').style.display = 'block';
-        document.getElementById('imageForm').style.display = 'none';
-    } else {
+    if (selectedType === 'image') {
         document.getElementById('textForm').style.display = 'none';
         document.getElementById('imageForm').style.display = 'block';
+    } else {
+        document.getElementById('textForm').style.display = 'block';
+        document.getElementById('imageForm').style.display = 'none';
     }
 });
 
@@ -119,16 +119,3 @@ function handleDragLeave(event) {
     const dropZone = event.currentTarget;
     dropZone.classList.remove('active-drag');
 }
-
-// Dark Mode Toggle
-const darkModeCheckbox = document.getElementById('darkModeCheckbox');
-
-darkModeCheckbox.addEventListener('change', function() {
-    if (this.checked) {
-        document.body.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-    } else {
-        document.body.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
-    }
-});

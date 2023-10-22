@@ -20,12 +20,6 @@ def allowed_file(filename):
 def index():
     return render_template('index.html', analysis=None)
 
-@app.route('/analyze-text', methods=['POST'])
-def analyze_text():
-    text = request.form.get('text')
-    analysis = get_response(text)
-    return jsonify({'analysis': analysis})
-
 @app.route('/analyze-image', methods=['POST'])
 def analyze_image():
     if 'file' not in request.files:
@@ -49,6 +43,12 @@ def analyze_image():
         return jsonify({'analysis': analysis})
 
     return jsonify({'error': 'Invalid file type'}), 400
+
+@app.route('/analyze-text', methods=['POST'])
+def analyze_text():
+    text = request.form.get('text')
+    analysis = get_response(text)
+    return jsonify({'analysis': analysis})
 
 def verify_recaptcha(recaptcha_response):
     payload = {

@@ -11,29 +11,34 @@
 </head>
 
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="https://olewestby.live/" class="nav-link">Home</a></li>
+                <li><a href="https://olewestby.live/#about" class="nav-link">About</a></li>
+                <li><a href="https://olewestby.live/#skills" class="nav-link">Skills</a></li>
+                <li><a href="https://olewestby.live/#projects" class="nav-link">Projects</a></li>
+                <li><a href="https://olewestby.live/#resume" class="nav-link">Resume</a></li>
+                <li><a href="https://summarizer.olewestby.live" class="nav-link">Summarizer</a></li>
+                <li><a href="https://spamdetector.olewestby.live" class="nav-link">SpamDetector</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <br>
+
     <div class="container">
-
-        <h3>
-        <a href="https://olewestby.live/" class="button-link">Go back</a>
-        </h3>
-
-        <p>If it does not work, check <a href="https://status.openai.com/">OpenAI Status</a> </p>
-
         <h2>Spam Detector</h2>
+
+        <p>Upload an email in form of a picture or text and have it analyzed for its legitimacy!</p>
 
         <label for="inputType">Choose input type:</label>
         <select id="inputType">
-            <option value="text">Paste Text</option>
             <option value="image">Upload Image</option>
+            <option value="text">Paste Text</option>
         </select>
 
-        <form id="textForm" action="/analyze-text" method="post">
-            <textarea name="text" id="text" cols="30" rows="10" placeholder="Enter text here..."></textarea>
-            <div class="g-recaptcha" data-sitekey="6LcUA6woAAAAAMUb9sxzM044NaKDuedToRfEu8VA"></div>
-            <input type="submit" value="Submit Text" name="submit">
-        </form>
-
-        <form id="imageForm" action="/analyze-image" method="post" enctype="multipart/form-data" style="display: none;">
+        <form id="imageForm" action="/analyze-image" method="post" enctype="multipart/form-data">
             <div class="drop-zone" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" onclick="document.getElementById('imageUpload').click()">
                 Drag & Drop your image here<label for="imageUpload" class="file-label"></label>
                 <input type="file" id="imageUpload" name="file" accept="image/*" style="display: none;">
@@ -42,7 +47,14 @@
         <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 200px; margin-top: 10px;">
             <div class="g-recaptcha" data-sitekey="6LcUA6woAAAAAMUb9sxzM044NaKDuedToRfEu8VA"></div>
             <input type="submit" value="Submit Image" name="submit">
-    
+            <p>If it does not work, check <a href="https://status.openai.com/">OpenAI Status</a></p>
+        </form>
+
+        <form id="textForm" action="/analyze-text" style="display: none" method="post">
+            <textarea name="text" id="text" cols="30" rows="10" placeholder="Enter text here..."></textarea>
+            <div class="g-recaptcha" data-sitekey="6LcUA6woAAAAAMUb9sxzM044NaKDuedToRfEu8VA"></div>
+            <input type="submit" value="Submit Text" name="submit">
+            <p>If it does not work, check <a href="https://status.openai.com/">OpenAI Status</a></p>
         </form>
 
         {% if analysis is not none %}

@@ -7,11 +7,12 @@ body, textarea, select, button {
 }
 
 body {
-    background: linear-gradient(45deg, #4298ee, #000000);
-    color: #333;
+    background-image: url('../img/3492868.gif');
+    background-attachment: fixed;
+    background-size: cover;
+    color: #000;
     font-size: 18px;
-    line-height: 1.5;
-    overflow-x: hidden;
+    line-height: 1.7;
 }
 
 /* Container styling */
@@ -19,7 +20,7 @@ body {
     max-width: 700px;
     margin: 5% auto;
     padding: 40px;
-    background-color: #ffffff;
+    background-color: #fff;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     opacity: 0;
@@ -62,26 +63,28 @@ select:focus, textarea:focus, button:focus {
 
 button {
     cursor: pointer;
-    background-color: #3498db;
+    background-color: #000000;
     color: #fff;
     border: none;
     border-radius: 8px;
 }
 
 button:hover {
-    background-color: #2980b9;
+    background-color: #000000;
 }
 
 input[type="submit"] {
-    padding: 5px 10px;
-    background: linear-gradient(90deg, #3498db, #2980b9);
+    display: inline-block;
+    text-align: center;
+    line-height: normal;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #000000;
     color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 12px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: background-color 0.3s;
 }
 
 input[type="submit"]:hover {
@@ -141,9 +144,9 @@ input[type="submit"]:active {
     top: 10px;           /* Adjust this value for desired vertical placement */
     left: 10px;          /* Adjust this value for desired horizontal placement */
     display: inline-block;
-    padding: 5px 10px;   /* Reduced padding for a smaller button */
+    padding: 10px 20px;   /* Reduced padding for a smaller button */
     border: none;
-    background-color: #3498db;
+    background-color: #000000;
     color: white;
     text-decoration: none;
     border-radius: 3px;  /* Smaller border radius for a tighter curve */
@@ -152,5 +155,45 @@ input[type="submit"]:active {
 }
 
 .button-link:hover {
-    background-color: #2980b9;
+    background-color: #000000;
+}
+
+.button-link:active {
+    transform: translateY(0);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #000;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #fff;
+    color: #000;
 }
