@@ -10,15 +10,15 @@ body {
     background-image: url('../img/3492868.gif');
     background-attachment: fixed;
     background-size: cover;
-    padding-top: 70px;
     color: #000;
     font-size: 18px;
-    line-height: 1.7;
+    line-height: 1.5;
     transition: background-color 0.3s;
 }
 
 /* Container styling */
 .container {
+    position: relative;
     max-width: 700px;
     margin: 5% auto;
     padding: 40px;
@@ -79,6 +79,8 @@ input[type="submit"] {
     justify-content: center;
     margin-top: 20px;
     background-color: #000000;
+    font-weight: bold;
+    font-size: 12px;
     color: #fff;
     padding: 10px 20px;
     border-radius: 10px;
